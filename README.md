@@ -20,7 +20,6 @@ C:\Windows\System32\drivers\etc\hosts
 ```
 NGINX_PORT=80
 NETWORK_CRYP_SUBNET=172.50.0.0/16
-RPGU_DOCS_HOST=cryp.local
 
 DB_CONNECTION=pgsql
 DB_HOST=db-cryp
