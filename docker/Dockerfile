@@ -2,6 +2,8 @@ FROM php:8.3-fpm
 
 LABEL maintainer="Vykhodtcev Denis"
 
+USER root
+
 RUN apt-get update \
   && apt-get install -y \
              vim \
@@ -18,26 +20,31 @@ RUN apt-get update \
              pkg-config \
              libpq-dev \
              libboost-dev \
-             gzip
+             gzip \
+             git
 
 # Скопируем архив с КриптоПро CSP в контейнер
-# ADD linux-amd64_deb.tgz /opt/
+ADD /linux-amd64_deb.tgz /opt/
 
-# RUN /bin/sh /opt/linux-amd64_deb/install.sh lsb-cprocsp-devel cprocsp-pki-cades
+RUN /bin/sh /opt/linux-amd64_deb/install.sh lsb-cprocsp-devel cprocsp-pki-cades
 
-# ADD https://github.com/CryptoPro/phpcades.git /opt/cprocsp/src/phpcades
+WORKDIR /opt/cprocsp/src
 
-# RUN sed -i "s|PHPDIR=.*|PHPDIR=/usr/local/include/php|" /opt/cprocsp/src/phpcades/Makefile.unix
+#ADD https://github.com/CryptoPro/phpcades.git /opt/cprocsp/src/phpcades
+RUN git clone https://github.com/CryptoPro/phpcades.git
 
-# RUN cd /opt/cprocsp/src/phpcades && patch -p0 < ./php8_support.patch
+WORKDIR /opt/cprocsp/src/phpcades
 
-# RUN cd /opt/cprocsp/src/phpcades \
-#     && eval `/opt/cprocsp/src/doxygen/CSP/../setenv.sh --64`  \
-#     && make -f Makefile.unix \
-#     && ln -s /opt/cprocsp/src/phpcades/libphpcades.so /usr/local/lib/php/extensions/no-debug-non-zts-20220829/libphpcades.so \
-#     && /opt/cprocsp/sbin/amd64/cpconfig -ini '\cryptography\apppath' -add string 'libcurl.so' '/usr/lib/x86_64-linux-gnu/libcurl.so' \
-#     && cd / \
-#     && rm -r opt/linux-amd64_deb
+RUN sed -i "s|PHPDIR=.*|PHPDIR=/usr/local/include/php|" ./Makefile.unix
+
+RUN patch -p0 < ./php8_support.patch
+
+RUN eval `/opt/cprocsp/src/doxygen/CSP/../setenv.sh --64`  \
+    && make -f Makefile.unix \
+    && ln -s /opt/cprocsp/src/phpcades/libphpcades.so /usr/local/lib/php/extensions/no-debug-non-zts-20230831/libphpcades.so \
+    && /opt/cprocsp/sbin/amd64/cpconfig -ini '\cryptography\apppath' -add string 'libcurl.so' '/usr/lib/x86_64-linux-gnu/libcurl.so' \
+    && cd / \
+    && rm -r opt/linux-amd64_deb
 
 RUN docker-php-ext-install pgsql \
   && docker-php-ext-install pdo_pgsql \
