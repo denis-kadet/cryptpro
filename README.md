@@ -38,7 +38,7 @@ DB_PASSWORD=root
 
 - ```/opt/cprocsp/bin/amd64/cryptcp -creatcer -dn "CN=test" -cont '\\.\HDIMAGE\testcont' -dm``` - устанавливаем сертификат в хранилище mMy (работа будет вестись с хранилищем компьютера, LOCAL_MACHINE_STORE=1)
 
-- ```/opt/cprocsp/bin/amd64/certmgr -list -store mMy``` - проверяем сертификат
+- ```/opt/cprocsp/bin/amd64/certmgr -list -store mMy``` - проверяем сертификат 
 
 - ```/opt/cprocsp/bin/amd64/csptest -absorb -certs -autoprov``` - проверяем сертификат
 
