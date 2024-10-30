@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('signs', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->unsignedBigInteger('requset_id')->index()->comment('Идентификатор запроса');
+            $table->unsignedBigInteger('request_id')->index()->comment('Идентификатор запроса');
             $table->string('name_org')->nullable(false)->comment('Название организации');
             $table->string('city')->nullable(false)->comment('Город');
             $table->string('surname')->nullable(false)->comment('Фамилия');

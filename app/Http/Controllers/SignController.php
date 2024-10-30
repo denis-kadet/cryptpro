@@ -2,47 +2,51 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Sign;
+use Illuminate\Http\JsonResponse;
 use App\Http\Requests\StoreSignRequest;
 use App\Http\Requests\UpdateSignRequest;
-use App\Models\Sign;
 
 class SignController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Остановить валидацию после первой неуспешной проверки.
+     *
+     * @var bool
      */
+    protected $stopOnFirstFailure = true;
+
     public function index()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreSignRequest $request)
+    public function store(StoreSignRequest $request): JsonResponse
     {
-        return response()->json(['Test'], 200);
+        try {
+            $params = $request->all();
+
+            foreach ($params['data'] as $items) {
+                $items = ["request_id" =>  $params['request_id']] + $items;
+                Sign::create($items);
+            }
+        } catch (\Exception $e) {
+            return response()->json([$e->getMessage()], 404);
+        }
+
+        return response()->json(['success' => 'true', 'massege' => 'Данный сохранены'], 200);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Sign $sign)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdateSignRequest $request, Sign $sign)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Sign $sign)
     {
         //
