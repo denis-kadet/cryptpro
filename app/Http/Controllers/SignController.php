@@ -25,7 +25,6 @@ class SignController extends Controller
     {
         try {
             $params = $request->all();
-
             foreach ($params['data'] as $items) {
                 $items = ["request_id" =>  $params['request_id']] + $items;
                 Sign::create($items);
