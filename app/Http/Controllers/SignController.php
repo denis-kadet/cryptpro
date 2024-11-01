@@ -31,6 +31,10 @@ class SignController extends Controller
                 Sign::create($items);
             }
         } catch (\Exception $e) {
+            Log::error($e->getMessage(), [
+                'request' => $params,
+            ]);
+
             return response()->json([$e->getMessage()], 404);
         }
 
