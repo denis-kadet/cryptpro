@@ -25,11 +25,11 @@ class SignController extends Controller
     {
         try {
             $params = $request->all();
+
             foreach ($params['data'] as $items) {
                 $items = ["request_id" =>  $params['request_id']] + $items;
                 Sign::create($items);
             }
-            
         } catch (\Exception $e) {
             Log::error($e->getMessage(), [
                 'request' => $params,
