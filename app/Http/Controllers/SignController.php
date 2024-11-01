@@ -29,6 +29,7 @@ class SignController extends Controller
                 $items = ["request_id" =>  $params['request_id']] + $items;
                 Sign::create($items);
             }
+            
         } catch (\Exception $e) {
             Log::error($e->getMessage(), [
                 'request' => $params,
