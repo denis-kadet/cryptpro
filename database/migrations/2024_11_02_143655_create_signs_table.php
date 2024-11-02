@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('signs', function (Blueprint $table) {
             $table->uuid('uuid')->primary();
             $table->unsignedBigInteger('request_id')->index()->comment('Идентификатор запроса');
-            $table->bigInteger('status_id')->nullable(false)->comment('Стутус документа');
+            $table->bigInteger('status_id')->nullable()->comment('Статус документа');
             $table->foreign('status_id')->references('id')->on('signs_status');
             $table->string('name_org')->nullable(false)->comment('Название организации');
             $table->string('city')->nullable(false)->comment('Город');

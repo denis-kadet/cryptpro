@@ -9,10 +9,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Sign extends Model
 {
     use HasFactory, HasUuids;
+    
+    // Переопределение автоикремента на uuid
+    protected $keyType = 'string';
+    public $incrementing = false;
 
     protected $fillable = [
-        'id',
+        'uuid',
         'request_id',
+        'status_id',
         'name_org',
         'city',
         'surname',

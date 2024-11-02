@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Sign;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Log;
 use App\Http\Requests\StoreSignRequest;
 use App\Http\Requests\UpdateSignRequest;
 
