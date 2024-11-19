@@ -2,8 +2,6 @@ FROM php:8.3-fpm
 
 LABEL maintainer="Vykhodtcev Denis"
 
-USER root
-
 RUN apt-get update \
   && apt-get install -y \
              vim \
@@ -52,6 +50,10 @@ RUN docker-php-ext-install pgsql \
   && docker-php-ext-install zip \
   && docker-php-ext-install exif \
   && docker-php-ext-install opcache \
-  && docker-php-source delete
+  && docker-php-ext-install gd \
+  && docker-php-ext-configure gd --with-freetype --with-jpeg \
+  && docker-php-source delete 
+ 
+RUN chown -R www-data:www-data /var/www/html
 
 COPY php.ini /usr/local/etc/php/php.ini
