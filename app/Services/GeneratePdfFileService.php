@@ -11,10 +11,12 @@ use Illuminate\Support\Facades\Storage;
 
 class GeneratePdfFileService
 {
-    public function generatePdfFile(string $uuid = '9d64cea1-a7ac-409a-8ed5-619bbd4b0254', array $params = []): bool
+    public function generatePdfFile(array $params): bool
     {
+
         try {
-           
+
+            $uuid = $params['uuid'];
 
             $htmlContent = view('pattern', $params)->render();
 
@@ -38,7 +40,7 @@ class GeneratePdfFileService
                 ]
             );
 
-            SignsPathFile::create(
+            SignsPathFile::updateOrCreate(
                 [
                     'signs_uuid' => $uuid,
                     'path_pdf_draft' => $relativePath

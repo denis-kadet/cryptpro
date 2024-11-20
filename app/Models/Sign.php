@@ -9,10 +9,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Sign extends Model
 {
     use HasFactory, HasUuids;
-    
+
     // Переопределение автоикремента на uuid
     protected $keyType = 'string';
+    protected $primaryKey = 'uuid';
     public $incrementing = false;
+
+    protected $with = ['pathFile'];
+    //TODO! Формат надо переделать на русский язык
+    protected $casts = ['work_date' => 'date:j F Y'];
 
     protected $fillable = [
         'uuid',
@@ -30,5 +35,8 @@ class Sign extends Model
         'full_name_hr',
     ];
 
-    protected $cast = ['work_date'=> 'datetime:d.m.Y'];
+    public function pathFile()
+    {
+        return $this->hasOne(SignsPathFile::class, 'signs_uuid');
+    }
 }

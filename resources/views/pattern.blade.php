@@ -48,19 +48,18 @@ $signatureImg = '<img src="data:image/png;base64,' . base64_encode($signatureCon
         <tbody>
             <tr>
                 <td colspan="3" style="height: 35px; text-align: center; vertical-align: bottom; font-weight: bold;">
-                    Открытое
-                    акционерное общество "Буревестник"</td>
+                    {{ $name_org }}</td>
             </tr>
             <tr>
-                <td colspan="2" style="height: 35px; text-align: left; vertical-align: bottom;">г. Хабаровск</td>
-                <td colspan="1" style="height: 35px; text-align: right; vertical-align: bottom;">17 ноября 2024</td>
+                <td colspan="2" style="height: 35px; text-align: left; vertical-align: bottom;">{{ $city }}</td>
+                <td colspan="1" style="height: 35px; text-align: right; vertical-align: bottom;">{{ $updated_at }}</td>
             </tr>
             <tr>
                 <td style="height: 35px;"></td>
             </tr>
             <tr>
                 <td colspan="3" style="text-align: center; vertical-align: bottom; font-weight: bold;">Справка
-                    №123456</td>
+                    №{{ $request_id }}</td>
             </tr>
             <tr>
                 <td style="height: 35px;"></td>
@@ -68,9 +67,9 @@ $signatureImg = '<img src="data:image/png;base64,' . base64_encode($signatureCon
             <tr>
                 <td colspan="3">
                     <p style="text-indent: 25px; text-align: justify;">
-                        Справка дана Иванову Иван Ивановичу в том, что он(а) действительно
-                        работает в ОАО "Буревестник" на условиях совместительства с 1 августа 2022 года
-                        в должности юриста департамента внешних связей.
+                        Справка дана {{ $surname }} {{ $name }} {{ $middle_name }} в том, что он(а) действительно
+                        работает в {{ $name_org }} на условиях совместительства с {{ $formatted_work_date }}(1 августа 2022 года)
+                        в должности {{ $work_position }} {{ $work_department }}.
                     </p>
                 </td>
             </tr>
@@ -78,8 +77,7 @@ $signatureImg = '<img src="data:image/png;base64,' . base64_encode($signatureCon
                 <td style="height: 35px;"></td>
             </tr>
             <tr>
-                <td colspan="3" style="text-align: left; vertical-align: bottom">Справка дaна для предъявления по
-                    месту требования.</td>
+                <td colspan="3" style="text-align: left; vertical-align: bottom">Справка дaна для предъявления {{ $place_requirement }}.</td>
             </tr>
             <tr>
                 <td style="height: 35px;"></td>
@@ -87,7 +85,7 @@ $signatureImg = '<img src="data:image/png;base64,' . base64_encode($signatureCon
             <tr>
                 <td colspan="1" style="text-align: left; vertical-align: bottom">Начальние отдела кадров</td>
                 <td colspan="1" style="position: relative;"><span style="position: absolute; right: 25%">{!! $signatureImg !!}</span></td>
-                <td colspan="1" style="text-align: right; vertical-align: bottom">М.М. Гаврилова</td>
+                <td colspan="1" style="text-align: right; vertical-align: bottom">{{ $full_name_hr }}</td>
             </tr>
             <tr>
                 <td style="height: 35px;"></td>

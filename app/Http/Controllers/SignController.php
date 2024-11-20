@@ -7,7 +7,6 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
 use App\Http\Requests\StoreSignRequest;
 use App\Http\Requests\UpdateSignRequest;
-use App\Services\GeneratePdfFileService;
 
 class SignController extends Controller
 {
@@ -20,7 +19,6 @@ class SignController extends Controller
 
     public function index()
     {
-        (new GeneratePdfFileService())->generatePdfFile();
     }
 
     public function store(StoreSignRequest $request): JsonResponse

@@ -17,4 +17,9 @@ class SignsPathFile extends Model
         'path_pdf_sign',
         'path_sig_file',
     ];
+
+    public function sign()
+    {
+        return $this->belongsTo(Sign::class, 'uuid');
+    }
 }

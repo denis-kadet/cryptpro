@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('signs_path_file', function (Blueprint $table) {
             $table->id();
-            $table->foreignUuid('signs_uuid')->references('uuid')->on('signs')->onDelete('cascade');
+            $table->foreignUuid('signs_uuid')->unique()->references('uuid')->on('signs')->onDelete('cascade');
             $table->string('path_pdf_draft')->nullable()->comment('Путь до черновика');
             $table->string('path_pdf_sign')->nullable()->comment('Путь до подписанного документа');
             $table->string('path_sig_file')->nullable()->comment('Путь до sig файла');
